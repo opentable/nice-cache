@@ -57,10 +57,10 @@ http.createServer(function (req, res) {
 
 Gets the current instance of the cache (eventually after creating it).
 
-The optional `options` object can consist on one of more of the following properties:
+The optional `options` parameter can consist on one of more of the following properties:
 * `singleton`, bool, default `true`, when false returns a new instance after any initialisation.
 * `refreshInterval`, int, default `0`, sets the refresh interval for the subscribed functions (seconds). When 0 it does nothing.
-* `flushInterval`, int, default `0`, sets the flush interval for all the keys. When 0 it never flushes.
+* `flushInterval`, int, default `0`, sets the flush interval for all the keys. When 0 it never flushes and so values never expire.
 * `verbose`, bool, default `false`, writes stuff on the console for debugging purposes.
 
 ### Cache#set([type, ] key, value)
@@ -69,7 +69,7 @@ Sets a value. Type is optional.
 
 ### Cache#get([type, ] key)
 
-Gets a value. Type is optional.
+Gets a value. Type is optional. Returns `undefined` when a key is not found.
 
 ### Cache#flushAll()
 
