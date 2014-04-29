@@ -71,7 +71,7 @@ Sets a value. Type is optional.
 
 Gets a value. Type is optional. Returns `undefined` when a key is not found.
 
-### Cache#flushAll()
+### Cache#flush()
 
 Cleans the cache
 
