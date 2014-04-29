@@ -5,7 +5,7 @@ A nice in-memory cache for node.js. In addiction of the classic auto-flush mecha
 
 Node version: **0.8.0** required
 
-Build status: [![Build Status](https://secure.travis-ci.org/matteofigus/nice-cache.png?branch=master)](http://travis-ci.org/matteofigus/nice-cache)
+Build status: [![Build Status](https://secure.travis-ci.org/opentable/nice-cache.png?branch=master)](http://travis-ci.org/opentable/nice-cache)
 
 [![NPM](https://nodei.co/npm/nice-cache.png?downloads=true)](https://npmjs.org/package/nice-cache)
 
