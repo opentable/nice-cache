@@ -125,7 +125,7 @@ describe('niceCache.sub', function(){
 });
 
 describe('niceCache', function(){
-  it('should be a singleton when singleton = false', function(done){
+  it('should be a singleton when singleton = true', function(done){
     var cache1 = new niceCache({
       singleton: true
     });
