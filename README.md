@@ -79,6 +79,10 @@ Cleans the cache
 
 Subscribes the key-value assignment (paired with an optional type) to the refresh loop. The asynchronous function will need to have an (err, res) callback.
 
+### Cache#refresh([type, ] key, func)
+
+When key-value assignment [previously subscribed to a refresh handler](#cachesubtype--key-func), performs the refresh action immediately (instead of waiting for the `refreshInterval` to expire). `func` is a callback(err, res) containing the result of the refresh action.
+
 # Tests
 
 ```shell
