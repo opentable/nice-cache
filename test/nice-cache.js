@@ -79,6 +79,53 @@ describe('niceCache.get', function(){
   });
 });
 
+describe('niceCache.refresh', function(){
+
+  var cache;
+  beforeEach(function(){
+    cache = new niceCache({
+      refreshInterval: 30
+    });
+  });
+
+  it('should return error if trying to refresh a key that is not present', function(done){
+    cache.refresh('key', function(err, result){
+      err.should.be.eql('not found');
+      done();
+    });
+  });
+
+  it('should return error if trying to refresh a key that is not subscribed to any handler', function(done){
+    cache.set('key', '12345');
+
+    cache.refresh('key', function(err, result){
+      err.should.be.eql('not found');
+      done();
+    });
+  });
+
+  it('should refresh the value when refreshing a key subscribed to a refresh handler', function(done){
+
+    var c = 0;
+    var getLatestC = function(callback){
+      c++;
+      callback(null, c);
+    };
+
+    cache.set('key', -1);
+    cache.sub('key', getLatestC);
+
+    cache.get('key').should.be.eql(-1);
+    
+    cache.refresh('key', function(err, result){
+      result.should.be.eql(1);
+      cache.get('key').should.be.eql(1);
+      done();
+    });
+  
+  });
+});
+
 describe('niceCache.sub', function(){
   it('should allow a key to be refreshed in case of a refreshInterval option', function(done){
     var cache = new niceCache({
@@ -125,6 +172,24 @@ describe('niceCache.sub', function(){
 });
 
 describe('niceCache', function(){
+  it('should not be a singleton when singleton = false', function(done){
+    var cache1 = new niceCache();
+
+    cache1.flush();
+    cache1.set('key', '0000');
+
+    var cache2 = new niceCache({
+      singleton: false
+    });
+
+    cache2.flush();
+    cache2.set('key', '0001');
+
+    cache1.get('key').should.be.eql('0000');
+    cache2.get('key').should.be.eql('0001');
+    done();
+  });
+
   it('should be a singleton when singleton = true', function(done){
     var cache1 = new niceCache({
       singleton: true
